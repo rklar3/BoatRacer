@@ -48,7 +48,7 @@ public class dontdestroy : MonoBehaviour {
 
 	void Update()
 	{
-		print (soundOn);
+		//print (soundOn);
 
 	}
 

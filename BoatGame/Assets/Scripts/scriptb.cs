@@ -17,7 +17,7 @@ public class scriptb : main {
 		
 	public void gameOver(){
 
-		userscoreend.text = "Final Score: "+userscore;
+		userscoreend.text = "Final Score: " + PlayerPrefs.GetFloat ("level2score");
 		userpositionend.text = positionend +" Place";
 		GameOver.SetActive (true);	//function ends game
 		if (finalposition == "First") {
@@ -29,7 +29,7 @@ public class scriptb : main {
 		if (PlayerPrefs.GetFloat ("level2score") > userscore) {
 			//do nothing
 		} else {
-			PlayerPrefs.SetFloat ("level2score",userscore);
+			PlayerPrefs.SetFloat ("level2score",userscore+PlayerPrefs.GetInt("bonus_score"));
 		}
 
 	}
@@ -65,7 +65,7 @@ public class scriptb : main {
 
 
 	void correct(){
-		userscore = userscore + 25;
+		userscore = userscore + PlayerPrefs.GetInt("score_correct");
 		Score.text = "score: " + userscore;
 		oldspeed = speed;
 		if (boost == .80f) {StartCoroutine("boostfunction");}
@@ -87,8 +87,8 @@ public class scriptb : main {
 	public void incorrect(){
 		if(speed >= 2)
 			speed = speed - 2;
-		if(userscore >- 0 )
-			userscore = userscore - 10;
+		if(userscore >= 0 )
+			userscore = userscore - PlayerPrefs.GetInt("score_incorrect");
 		Score.text = "score: " + userscore;
 		playerspeed.text = "Speed: " + speed;
 		Outcome1 = "incorrect";
@@ -155,7 +155,6 @@ public class scriptb : main {
 	}
 		
 	public void Update () {
-		int userspeeds = Mathf.RoundToInt ((float)speed);
 		moveplayers ();
 
 		PlayerTime += 1 * Time.deltaTime;
@@ -167,15 +166,12 @@ public class scriptb : main {
 			c1 = 0;c2 = 0;c3 = 0;
 		}
 		placing ();
+	
 
+		c3 = Random.Range (PlayerPrefs.GetInt ("easyspeed011"),PlayerPrefs.GetInt ("easyspeed11"));
+		c2 = Random.Range (PlayerPrefs.GetInt ("easyspeed011"),PlayerPrefs.GetInt ("easyspeed22"));
+		c1 = Random.Range (PlayerPrefs.GetInt ("easyspeed011"),PlayerPrefs.GetInt ("easyspeed33"));
 
-		speed11 = userspeeds + 4;
-		speed22 = userspeeds + 3;
-		speed33 = userspeeds + 5;
-
-		c3 = Random.Range (7,speed11);
-		c2 = Random.Range (7,speed22);
-		c1 = Random.Range (7,speed33);
 
 		// calculate the computers distance remaining
 		if (computerposition1 > 0) {computerposition1 = computerposition1 - (c1 * constant);}
@@ -203,8 +199,6 @@ public class scriptb : main {
 			distancenum = distancenum - (speed * constant);		//updates user distance remaining
 		int d = Mathf.RoundToInt((float)distancenum);	
 		distance.text = d + "m";								//updates user distance remaining
-
-		print ("comp1 "+c1);print ("comp2 "+c2);print ("comp3 "+c3);print ("my speed"+userspeeds);
-	}
+		}
 
 }

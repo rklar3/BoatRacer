@@ -12,10 +12,9 @@ public class script2 : main {
 		PlayerTime = .0f;
 	}
 		
-
 	public void gameOver(){
 
-		userscoreend.text = "Final Score: "+userscore;
+		userscoreend.text = "Final Score: " + PlayerPrefs.GetFloat ("level3score");
 		userpositionend.text = positionend +" Place";
 		GameOver.SetActive (true);	//function ends game
 		if (finalposition == "First") {
@@ -27,7 +26,7 @@ public class script2 : main {
 		if (PlayerPrefs.GetFloat ("level3score") > userscore) {
 			//do nothing
 		} else {
-			PlayerPrefs.SetFloat ("level3score",userscore);
+			PlayerPrefs.SetFloat ("level3score",userscore+PlayerPrefs.GetInt("bonus_score"));
 		}
 	}
 
@@ -39,7 +38,7 @@ public class script2 : main {
 
 	private void correct(){
 		userscore = userscore + 25;
-		Score.text = "score: " + userscore;
+		userscore = userscore + PlayerPrefs.GetInt("score_correct");
 		oldspeed = speed;
 		if (boost == .80f) {StartCoroutine("boostfunction");}
 		speed = speed + 1;
@@ -60,8 +59,8 @@ public class script2 : main {
 	public void incorrect(){
 		if(speed >= 2)
 			speed = speed - 2;
-		if(userscore >- 0 )
-			userscore = userscore - 10;
+		if(userscore >= 0 )
+			userscore = userscore - PlayerPrefs.GetInt("score_incorrect");
 		Score.text = "score: " + userscore;
 		playerspeed.text = "Speed: " + speed;
 		Outcome1 = "incorrect";
@@ -116,13 +115,9 @@ public class script2 : main {
 		}
 		placing ();
 
-		speed11 = userspeeds + 2;
-		speed22 = userspeeds + 4;
-		speed33 = userspeeds + 3;
-
-		c3 = Random.Range (7,speed11);
-		c2 = Random.Range (7,speed22);
-		c1 = Random.Range (7,speed33);
+		c3 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed1"));
+		c2 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed2"));
+		c1 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed3"));
 
 		// calculate the computers distance remaining
 		if (computerposition1 > 0) {computerposition1 = computerposition1 - (c1 * constant);}

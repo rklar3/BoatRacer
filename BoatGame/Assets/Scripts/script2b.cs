@@ -14,7 +14,7 @@ public class script2b : main {
 		
 	public void gameOver(){
 
-		userscoreend.text = "Final Score: "+userscore;
+		userscoreend.text = "Final Score: " + PlayerPrefs.GetFloat ("level4score");
 		userpositionend.text = positionend +" Place";
 		GameOver.SetActive (true);	//function ends game
 		if (finalposition == "First") {
@@ -26,7 +26,7 @@ public class script2b : main {
 		if (PlayerPrefs.GetFloat ("level4score") > userscore) {
 			//do nothing
 		} else {
-			PlayerPrefs.SetFloat ("level4score",userscore);
+			PlayerPrefs.SetFloat ("level4score",userscore+PlayerPrefs.GetInt("bonus_score"));
 		}
 	}
 
@@ -37,17 +37,12 @@ public class script2b : main {
 	}
 
 	private void correct(){
-		userscore = userscore + 25;
+		userscore = userscore + PlayerPrefs.GetInt("score_correct");
 		Score.text = "score: " + userscore;
-
 		oldspeed = speed;
-
 		if (boost == .80f) {StartCoroutine("boostfunction");}
-
-
 		speed = speed + 1;
 		playerspeed.text = "Speed: " + speed;
-
 		calc11 ();
 		calc22 ();
 		Score.text = "score: " + userscore;
@@ -66,8 +61,8 @@ public class script2b : main {
 	public void incorrect(){
 		if(speed >= 2)
 			speed = speed - 2;
-		if(userscore >- 0 )
-			userscore = userscore - 10;
+		if(userscore >= 0 )
+			userscore = userscore - PlayerPrefs.GetInt("score_incorrect");
 		Score.text = "score: " + userscore;
 		playerspeed.text = "Speed: " + speed;
 		Outcome1 = "incorrect";
@@ -104,7 +99,6 @@ public class script2b : main {
 	}
 
 	public void Update () {
-		int userspeeds = Mathf.RoundToInt ((float)speed);
 		moveplayers ();
 
 		PlayerTime += 1 * Time.deltaTime;
@@ -117,13 +111,11 @@ public class script2b : main {
 		}
 		placing ();
 
-		speed11 = userspeeds + 4;
-		speed22 = userspeeds + 3;
-		speed33 = userspeeds + 5;
 
-		c3 = Random.Range (7,speed11);
-		c2 = Random.Range (7,speed22);
-		c1 = Random.Range (7,speed33);
+		c3 = Random.Range (PlayerPrefs.GetInt ("easyspeed011"),PlayerPrefs.GetInt ("easyspeed11"));
+		c2 = Random.Range (PlayerPrefs.GetInt ("easyspeed011"),PlayerPrefs.GetInt ("easyspeed22"));
+		c1 = Random.Range (PlayerPrefs.GetInt ("easyspeed011"),PlayerPrefs.GetInt ("easyspeed33"));
+
 
 
 		// calculate the computers distance remaining
@@ -152,6 +144,5 @@ public class script2b : main {
 		int d = Mathf.RoundToInt((float)distancenum);	
 		distance.text = d + "m";								//updates user distance remaining
 
-		print ("comp1 "+c1);print ("comp2 "+c2);print ("comp3 "+c3);print ("my speed"+userspeeds);
 	}
 }

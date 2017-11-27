@@ -35,11 +35,11 @@ public class main : MonoBehaviour {
 	public float speed = 0; // inital speed = 0
 	public float oldspeed;
 
-	public float num1;
-	public float num2;
+	public int num1;
+	public int num2;
 
-	public float number1;
-	public float number2;
+	public int number1;
+	public int number2;
 
 	public float userscore = 0;
 	public Text playerspeed;
@@ -60,6 +60,19 @@ public class main : MonoBehaviour {
 	public double computerposition3 = 1000;
 
 	public int randomgen;
+
+	//level 5,6
+	public Text solvetext1;
+	public Text solvetext2;
+	public Text solvetext3;
+	public int buttonnum1;
+	public int buttonnum2;
+	public int buttonnum3;
+
+	public string antiinequality;
+	public int buttonnum;
+	public int answer;
+	//
 
 
 	public int c1;
@@ -85,7 +98,7 @@ public class main : MonoBehaviour {
 
 	IEnumerator boostfunction ()
 	{
-		userscore = userscore + 100;
+		userscore = userscore + PlayerPrefs.GetInt("boost_score");
 		speed = speed + 10;
 		booster.text = "BOOSTING...";
 		yield return new WaitForSeconds(3);
@@ -96,7 +109,7 @@ public class main : MonoBehaviour {
 	}
 
 
-	// analytics 
+	// unity analytics 
 	public void correctAnalytics(int level){
 		Analytics.CustomEvent("level"+level+": Correct");
 	}
@@ -109,37 +122,30 @@ public class main : MonoBehaviour {
 	public void notfirstplace(int level){
 		Analytics.CustomEvent("not placed first:"+level);
 	}
+	//
 
 
-
-
-
-
-
-
-
-	public float calc1(){
-		return num1 = Random.Range (0,100);
-	}
-
-	public float calc2(){
-		return num2 = Random.Range (0,100);
-	}
-
-	public float calc11(){
-		return num1 = Random.Range (100,200);
-	}
-
-	public float calc22(){
-		return num2 = Random.Range (100,200);
-	}
-
-
-	public void start(){
+	void start(){
 		Score.text = "score: " + userscore;
 		distance.text = distancenum+"m";
 	}
 		
+	public int calc1(){
+		return num1 = Random.Range (PlayerPrefs.GetInt ("numlow"),PlayerPrefs.GetInt ("numhigh"));
+	}
+
+	public int calc2(){
+		return num2 = Random.Range (PlayerPrefs.GetInt ("numlow"),PlayerPrefs.GetInt ("numhigh"));
+	}
+
+	public int calc11(){
+		return num1 = Random.Range (PlayerPrefs.GetInt ("numlow2"),PlayerPrefs.GetInt ("numhigh2"));
+	}
+
+	public int calc22(){
+		return num2 = Random.Range (PlayerPrefs.GetInt ("numlow2"),PlayerPrefs.GetInt ("numhigh2"));
+	}
+
 
 	public void moveplayers(){
 		playerspeed.text = "Speed: " + speed;

@@ -2055,7 +2055,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 200
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 200
     m_Alignment: 4
@@ -4145,6 +4145,15 @@ MonoBehaviour:
   computerposition2: 1000
   computerposition3: 1000
   randomgen: 0
+  solvetext1: {fileID: 0}
+  solvetext2: {fileID: 0}
+  solvetext3: {fileID: 0}
+  buttonnum1: 0
+  buttonnum2: 0
+  buttonnum3: 0
+  antiinequality: 
+  buttonnum: 0
+  answer: 0
   c1: 0
   c2: 0
   c3: 0

@@ -144,7 +144,7 @@ PlayerSettings:
     iOS: comRavanKlar.ProductName
   buildNumber: {}
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 16
+  AndroidMinSdkVersion: 25
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -232,7 +232,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 88f76f18520011749b20fb0977ee6c3b, type: 3}
+      m_Icon: {fileID: 2800000, guid: c7ace32593e6240b2867b65f348d5657, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []

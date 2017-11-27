@@ -7,104 +7,89 @@ using UnityEngine.SceneManagement;
 
 public class script3 : main {
 
-	public Text solvetext1;
-	public Text solvetext2;
-	public Text solvetext3;
-	public int buttonnum1;
-	public int buttonnum2;
-	public int buttonnum3;
+	public int calcc1(){return number1 = Random.Range (PlayerPrefs.GetInt ("numlow"),PlayerPrefs.GetInt ("numhigh"));}
+	public int calcc2(){return number2 = Random.Range (PlayerPrefs.GetInt ("numlow"),PlayerPrefs.GetInt ("numhigh"));}
 
-	public string antiinequality;
-	public int buttonnum;
-	public int answer;
-
-	public float calcc1(){return number1 = Random.Range (0,100);}
-	public float calcc2(){return number2 = Random.Range (0,100);}
-
-	void Start() {
+	void Start() 
+	{
 		PlayerTime = .0f;
 		calc4 ();
 		calcequality ();
 		Question.text = number1 + antiinequality + " x " + inequality + number2;
 	}
 		
-	public void gameOver(){
-		userscoreend.text = "Final Score: "+userscore;
-		userpositionend.text = positionend +" Place";
-		GameOver.SetActive (true);	//function ends game
-		if (finalposition == "First") {
-			firstplace (5);
-			gameManager.winLevel ();
-		} else {
-			notfirstplace (5);
-		}
-		if (PlayerPrefs.GetFloat ("level5score") > userscore) {
-			//do nothing
-		} else {
-			PlayerPrefs.SetFloat ("level5score",userscore);
-		}	
-	}
 
 	public int calcequality(){
-		inequalityval = Random.Range (1,4);
-		if (inequalityval == 2) {
-			inequality = "≤";
-			antiinequality = "≥";
+		inequalityval = Random.Range (1,4);	
+		if (inequalityval == 2) 
+		{	
+			inequality = "≤"; 
+			antiinequality = "≥"; 
 			calcc1 ();
 			calcc2 ();
-			int numm1 = (int) number1;
-			int numm2 = (int) number2;
-			if (numm1 > numm2) {
-				buttonnum1 = Random.Range (5, numm2);
-				buttonnum2 = Random.Range (numm1+1,100);
-				buttonnum3 = Random.Range (numm2+1,100 );
-			}if (numm1 < numm2) {
-				buttonnum1 = Random.Range (5,numm1);
-				buttonnum2 = Random.Range (numm1+1,100);
-				buttonnum3 = Random.Range (numm2+1,100 );
+		
+			if (number1 > number2) 
+			{
+				buttonnum1 = Random.Range (PlayerPrefs.GetInt ("numlow"), number2);
+				buttonnum2 = Random.Range (number1,PlayerPrefs.GetInt ("numhigh"));
+				buttonnum3 = Random.Range (number2,PlayerPrefs.GetInt ("numhigh") );
+			}
+
+			if (number1 < number2) 
+			{
+				buttonnum1 = Random.Range (PlayerPrefs.GetInt ("numlow"),number1);
+				buttonnum2 = Random.Range (number1,PlayerPrefs.GetInt ("numhigh"));
+				buttonnum3 = Random.Range (number2,PlayerPrefs.GetInt ("numhigh") );
 			}
 			calc4 ();
 		}
-		if (inequalityval == 3) {
+
+
+		if (inequalityval == 3) 
+		{
 			inequality = "≥";
 			antiinequality = "≤";
 			calcc1 (); 
 			calcc2 ();
-			int numm1 = (int) number1;
-			int numm2 = (int) number2;
-			if (numm1 > numm2) {
-				buttonnum1 = Random.Range (numm1, 100);
-				buttonnum2 = Random.Range (0, numm1-1);
-				buttonnum3 = Random.Range (0,buttonnum2 );
 
-			}if (numm1 < numm2) {
-				buttonnum1 = Random.Range (numm2,100);
-				buttonnum2 = Random.Range (0, numm1-1);
-				buttonnum3 = Random.Range (0,buttonnum2 );
+			if (number1 > number2) {
+				buttonnum1 = Random.Range (number1, PlayerPrefs.GetInt ("numhigh"));
+				buttonnum2 = Random.Range (PlayerPrefs.GetInt ("numlow"), number1);
+				buttonnum3 = Random.Range (PlayerPrefs.GetInt ("numlow"),buttonnum2 );
+			}
+
+			if (number1 < number2) 
+			{
+				buttonnum1 = Random.Range (number2,PlayerPrefs.GetInt ("numhigh"));
+				buttonnum2 = Random.Range (PlayerPrefs.GetInt ("numlow"), number1);
+				buttonnum3 = Random.Range (PlayerPrefs.GetInt ("numlow"),buttonnum2 );
 			}
 			calc4 ();
 		}
+
 		return inequalityval;
 	}
-
-	public int calc4(){
+		
+	public int calc4()
+	{
 		buttonnum = Random.Range (0,3);
-		calc1();
-		calc2();
 		calcequality();
-		if (buttonnum == 0) {
+		if (buttonnum == 0) 
+		{
 			solvetext1.text = "x = "+ buttonnum1;
 			solvetext2.text = "x = "+ buttonnum2;
 			solvetext3.text = "x = "+ buttonnum3;
 			answer = 0;
 		}
-		if (buttonnum == 1) {
+		if (buttonnum == 1) 
+		{
 			solvetext2.text = "x = "+ buttonnum1;
 			solvetext3.text = "x = "+ buttonnum2;
 			solvetext1.text = "x = "+ buttonnum3;
 			answer = 1;
 		}
-		if (buttonnum == 2) {
+		if (buttonnum == 2) 
+		{
 			solvetext3.text = "x = "+ buttonnum1;
 			solvetext1.text = "x = "+ buttonnum2;
 			solvetext2.text = "x = "+ buttonnum3;
@@ -112,10 +97,14 @@ public class script3 : main {
 		}
 		return buttonnum;
 	}
-		
 
-	public void correct(){
-		userscore = userscore + 25;
+	public void solve1(){if (answer == 0) correct ();else incorrect ();}
+	public void solve2(){if (answer == 1) correct ();else incorrect ();}
+	public void solve3(){if (answer == 2) correct ();else incorrect ();}
+
+	public void correct()
+	{
+		userscore = userscore + PlayerPrefs.GetInt("score_correct");
 		Score.text = "score: " + userscore;
 		if (boost == .80f) {StartCoroutine("boostfunction");}
 		speed = speed + 1;
@@ -133,11 +122,12 @@ public class script3 : main {
 		correctsound.Play ();
 	}
 
-	public void incorrect(){
+	public void incorrect()
+	{
 		if(speed >= 2)
 			speed = speed - 2;
-		if(userscore >- 0 )
-			userscore = userscore - 10;
+		if(userscore >= 0 )
+			userscore = userscore - PlayerPrefs.GetInt("score_incorrect");
 		Score.text = "score: " + userscore;
 		playerspeed.text = "Speed: " + speed;
 		Outcome1 = "incorrect";
@@ -148,24 +138,27 @@ public class script3 : main {
 		incorrectAnalytics (5);
 		Incorrectsound.Play ();
 	}
-		
-	public  void solve1(){			
-		if (answer == 0) correct ();
-		else incorrect ();
-	}
 
-	public  void solve2(){			
-		if (answer == 1) correct ();
-		else incorrect ();
-	}
-
-	public  void solve3(){			
-		if (answer == 2) correct ();
-		else incorrect ();
+	public void gameOver(){
+		userscoreend.text = "Final Score: " + PlayerPrefs.GetFloat ("level5score");
+		userpositionend.text = positionend +" Place";
+		GameOver.SetActive (true);	//function ends game
+		if (finalposition == "First") {
+			firstplace (5);
+			gameManager.winLevel ();
+		} else {
+			notfirstplace (5);
+		}
+		if (PlayerPrefs.GetFloat ("level5score") > userscore) {
+			//do nothing
+		} else {
+			PlayerPrefs.SetFloat ("level5score",userscore+PlayerPrefs.GetInt("bonus_score"));
+		}	
 	}
 
 	public void Update () {
-		int userspeeds = Mathf.RoundToInt ((float)speed);
+
+
 		moveplayers ();
 
 		PlayerTime += 1 * Time.deltaTime;
@@ -178,13 +171,9 @@ public class script3 : main {
 		}
 		placing ();
 
-		speed11 = userspeeds + 2;
-		speed22 = userspeeds + 4;
-		speed33 = userspeeds + 3;
-
-		c3 = Random.Range (3,speed11);
-		c2 = Random.Range (3,speed22);
-		c1 = Random.Range (3,speed33);
+		c3 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed1"));
+		c2 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed2"));
+		c1 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed3"));
 
 		// calculate the computers distance remaining
 		if (computerposition1 > 0) {computerposition1 = computerposition1 - (c1 * constant);}
@@ -212,7 +201,7 @@ public class script3 : main {
 		int d = Mathf.RoundToInt((float)distancenum);	
 		distance.text = d + "m";								//updates user distance remaining
 
-		print ("comp1 "+c1);print ("comp2 "+c2);print ("comp3 "+c3);print ("my speed"+userspeeds);
+		//print ("comp1 "+c1);print ("comp2 "+c2);print ("comp3 "+c3);print ("my speed"+userspeeds);
 	}
 
 }
