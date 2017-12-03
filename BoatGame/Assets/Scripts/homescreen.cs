@@ -31,7 +31,7 @@ public class homescreen : MonoBehaviour {
 	private const string TWITTER_ADDRESS = "http://twitter.com/intent/tweet";
 	private const string TWEET_LANGUAGE = "en";
 	public static string descriptionParam;
-	private string appStoreLink = "http://www.YOUROWNAPPLINK.com";
+	private string appStoreLink ="https://play.google.com/store/apps/details?id=com.RavanKlar.ProductName"; 
 
 
 	public void ShareToTW()

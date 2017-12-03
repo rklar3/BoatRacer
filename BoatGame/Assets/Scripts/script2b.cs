@@ -52,8 +52,6 @@ public class script2b : main {
 		Outcome.color = cor;	//color becomes green
 		boost = boost + 0.20f;
 		boostbar.fillAmount = boost;
-		AudioSource audiocorrect = GetComponent<AudioSource> ();
-		audiocorrect.Play();
 		correctAnalytics (4);
 		correctsound.Play ();
 	}
@@ -109,7 +107,11 @@ public class script2b : main {
 			userFinalTime = PlayerTime; 
 			c1 = 0;c2 = 0;c3 = 0;
 		}
-		placing ();
+		if ((Player1FinalTime > userFinalTime) || (Player2FinalTime > userFinalTime) || (Player3FinalTime> userFinalTime)) {positionend = "First";}
+		if (((Player2FinalTime < userFinalTime) || (Player3FinalTime < userFinalTime)) && (Player1FinalTime> userFinalTime)|| ((Player1FinalTime < userFinalTime) || (Player3FinalTime < userFinalTime)) && (Player2FinalTime > userFinalTime)||((Player3FinalTime < userFinalTime) || (Player2FinalTime < userFinalTime)) && (Player1FinalTime > userFinalTime)){positionend = "Third";}
+		if ((Player1FinalTime < userFinalTime) && ((Player2FinalTime > userFinalTime) || (Player3FinalTime > userFinalTime)) || (Player2FinalTime < userFinalTime) && ((Player1FinalTime > userFinalTime) || (Player3FinalTime > userFinalTime)) || (Player3FinalTime < userFinalTime) && ((Player2FinalTime > userFinalTime) || (Player1FinalTime > userFinalTime))){positionend = "Second";}
+		if ((Player1FinalTime < userFinalTime) && (Player2FinalTime < userFinalTime) && (Player3FinalTime < userFinalTime)) {positionend = "Last";}
+
 
 
 		c3 = Random.Range (PlayerPrefs.GetInt ("easyspeed011"),PlayerPrefs.GetInt ("easyspeed11"));

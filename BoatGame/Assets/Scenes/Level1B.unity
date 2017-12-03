@@ -464,7 +464,7 @@ MonoBehaviour:
   inequality: 
   inequalityval: 0
   userscoreend: {fileID: 1824198961}
-  userpositionend: {fileID: 1824198961}
+  userpositionend: {fileID: 1262624496}
   positionend: 
   finalposition: 
   distancenum: 1000

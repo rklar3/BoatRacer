@@ -113,7 +113,11 @@ public class script2 : main {
 			userFinalTime = PlayerTime; 
 			c1 = 0;c2 = 0;c3 = 0;
 		}
-		placing ();
+		if ((Player1FinalTime > userFinalTime) || (Player2FinalTime > userFinalTime) || (Player3FinalTime> userFinalTime)) {positionend = "First";}
+		if (((Player2FinalTime < userFinalTime) || (Player3FinalTime < userFinalTime)) && (Player1FinalTime> userFinalTime)|| ((Player1FinalTime < userFinalTime) || (Player3FinalTime < userFinalTime)) && (Player2FinalTime > userFinalTime)||((Player3FinalTime < userFinalTime) || (Player2FinalTime < userFinalTime)) && (Player1FinalTime > userFinalTime)){positionend = "Third";}
+		if ((Player1FinalTime < userFinalTime) && ((Player2FinalTime > userFinalTime) || (Player3FinalTime > userFinalTime)) || (Player2FinalTime < userFinalTime) && ((Player1FinalTime > userFinalTime) || (Player3FinalTime > userFinalTime)) || (Player3FinalTime < userFinalTime) && ((Player2FinalTime > userFinalTime) || (Player1FinalTime > userFinalTime))){positionend = "Second";}
+		if ((Player1FinalTime < userFinalTime) && (Player2FinalTime < userFinalTime) && (Player3FinalTime < userFinalTime)) {positionend = "Last";}
+
 
 		c3 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed1"));
 		c2 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed2"));

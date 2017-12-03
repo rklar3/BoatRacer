@@ -14,14 +14,14 @@ public class script3b : main {
 	{
 		PlayerTime = .0f;
 		calc4 ();
-		calcequality ();
+		//calcequality ();
 		Question.text = number1 + antiinequality + " x " + inequality + number2;
 	}
 
 
 	public int calcequality(){
-		inequalityval = Random.Range (1,4);	
-		if (inequalityval == 2) 
+		inequalityval = Random.Range (1,3);	
+		if (inequalityval == 1) 
 		{	
 			inequality = "≤"; 
 			antiinequality = "≥"; 
@@ -41,11 +41,11 @@ public class script3b : main {
 				buttonnum2 = Random.Range (number1,PlayerPrefs.GetInt ("numhigh2"));
 				buttonnum3 = Random.Range (number2,PlayerPrefs.GetInt ("numhigh2") );
 			}
-			calc4 ();
+			//calc4 ();
 		}
 
 
-		if (inequalityval == 3) 
+		if (inequalityval == 2) 
 		{
 			inequality = "≥";
 			antiinequality = "≤";
@@ -64,7 +64,7 @@ public class script3b : main {
 				buttonnum2 = Random.Range (PlayerPrefs.GetInt ("numlow2"), number1);
 				buttonnum3 = Random.Range (PlayerPrefs.GetInt ("numlow2"),buttonnum2 );
 			}
-			calc4 ();
+			//calc4 ();
 		}
 
 		return inequalityval;
@@ -111,7 +111,7 @@ public class script3b : main {
 		playerspeed.text = "Speed: " + speed;
 		oldspeed = speed;
 		calc4 ();
-		calcequality ();
+		//calcequality ();
 		Question.text = number1 + antiinequality + " x " + inequality + number2;
 		Outcome1 = "correct";
 		Outcome.text = Outcome1;
@@ -170,7 +170,11 @@ public class script3b : main {
 			userFinalTime = PlayerTime; 
 			c1 = 0;c2 = 0;c3 = 0;
 		}
-		placing ();
+		if ((Player1FinalTime > userFinalTime) || (Player2FinalTime > userFinalTime) || (Player3FinalTime> userFinalTime)) {positionend = "First";}
+		if (((Player2FinalTime < userFinalTime) || (Player3FinalTime < userFinalTime)) && (Player1FinalTime> userFinalTime)|| ((Player1FinalTime < userFinalTime) || (Player3FinalTime < userFinalTime)) && (Player2FinalTime > userFinalTime)||((Player3FinalTime < userFinalTime) || (Player2FinalTime < userFinalTime)) && (Player1FinalTime > userFinalTime)){positionend = "Third";}
+		if ((Player1FinalTime < userFinalTime) && ((Player2FinalTime > userFinalTime) || (Player3FinalTime > userFinalTime)) || (Player2FinalTime < userFinalTime) && ((Player1FinalTime > userFinalTime) || (Player3FinalTime > userFinalTime)) || (Player3FinalTime < userFinalTime) && ((Player2FinalTime > userFinalTime) || (Player1FinalTime > userFinalTime))){positionend = "Second";}
+		if ((Player1FinalTime < userFinalTime) && (Player2FinalTime < userFinalTime) && (Player3FinalTime < userFinalTime)) {positionend = "Last";}
+
 
 
 		c3 = Random.Range (PlayerPrefs.GetInt ("easyspeed011"),PlayerPrefs.GetInt ("easyspeed11"));

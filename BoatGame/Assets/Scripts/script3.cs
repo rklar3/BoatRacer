@@ -14,14 +14,16 @@ public class script3 : main {
 	{
 		PlayerTime = .0f;
 		calc4 ();
-		calcequality ();
 		Question.text = number1 + antiinequality + " x " + inequality + number2;
 	}
 		
 
 	public int calcequality(){
-		inequalityval = Random.Range (1,4);	
-		if (inequalityval == 2) 
+		inequalityval = Random.Range (1,3);	
+		print ("value: "+inequalityval);
+
+
+		if (inequalityval == 1) 
 		{	
 			inequality = "≤"; 
 			antiinequality = "≥"; 
@@ -41,11 +43,10 @@ public class script3 : main {
 				buttonnum2 = Random.Range (number1,PlayerPrefs.GetInt ("numhigh"));
 				buttonnum3 = Random.Range (number2,PlayerPrefs.GetInt ("numhigh") );
 			}
-			calc4 ();
 		}
 
 
-		if (inequalityval == 3) 
+		if (inequalityval == 2) 
 		{
 			inequality = "≥";
 			antiinequality = "≤";
@@ -64,7 +65,6 @@ public class script3 : main {
 				buttonnum2 = Random.Range (PlayerPrefs.GetInt ("numlow"), number1);
 				buttonnum3 = Random.Range (PlayerPrefs.GetInt ("numlow"),buttonnum2 );
 			}
-			calc4 ();
 		}
 
 		return inequalityval;
@@ -72,8 +72,8 @@ public class script3 : main {
 		
 	public int calc4()
 	{
-		buttonnum = Random.Range (0,3);
 		calcequality();
+		buttonnum = Random.Range (0,3);
 		if (buttonnum == 0) 
 		{
 			solvetext1.text = "x = "+ buttonnum1;
@@ -110,8 +110,8 @@ public class script3 : main {
 		speed = speed + 1;
 		playerspeed.text = "Speed: " + speed;
 		oldspeed = speed;
-		calc4 ();
-		calcequality ();
+		calc4 (); //function calls calcequality
+
 		Question.text = number1 + antiinequality + " x " + inequality + number2;
 		Outcome1 = "correct";
 		Outcome.text = Outcome1;
@@ -158,7 +158,6 @@ public class script3 : main {
 
 	public void Update () {
 
-
 		moveplayers ();
 
 		PlayerTime += 1 * Time.deltaTime;
@@ -169,7 +168,11 @@ public class script3 : main {
 			userFinalTime = PlayerTime; 
 			c1 = 0;c2 = 0;c3 = 0;
 		}
-		placing ();
+		if ((Player1FinalTime > userFinalTime) || (Player2FinalTime > userFinalTime) || (Player3FinalTime> userFinalTime)) {positionend = "First";}
+		if (((Player2FinalTime < userFinalTime) || (Player3FinalTime < userFinalTime)) && (Player1FinalTime> userFinalTime)|| ((Player1FinalTime < userFinalTime) || (Player3FinalTime < userFinalTime)) && (Player2FinalTime > userFinalTime)||((Player3FinalTime < userFinalTime) || (Player2FinalTime < userFinalTime)) && (Player1FinalTime > userFinalTime)){positionend = "Third";}
+		if ((Player1FinalTime < userFinalTime) && ((Player2FinalTime > userFinalTime) || (Player3FinalTime > userFinalTime)) || (Player2FinalTime < userFinalTime) && ((Player1FinalTime > userFinalTime) || (Player3FinalTime > userFinalTime)) || (Player3FinalTime < userFinalTime) && ((Player2FinalTime > userFinalTime) || (Player1FinalTime > userFinalTime))){positionend = "Second";}
+		if ((Player1FinalTime < userFinalTime) && (Player2FinalTime < userFinalTime) && (Player3FinalTime < userFinalTime)) {positionend = "Last";}
+
 
 		c3 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed1"));
 		c2 = Random.Range (PlayerPrefs.GetInt ("easyspeed01"),PlayerPrefs.GetInt ("easyspeed2"));
@@ -201,7 +204,6 @@ public class script3 : main {
 		int d = Mathf.RoundToInt((float)distancenum);	
 		distance.text = d + "m";								//updates user distance remaining
 
-		//print ("comp1 "+c1);print ("comp2 "+c2);print ("comp3 "+c3);print ("my speed"+userspeeds);
 	}
 
 }

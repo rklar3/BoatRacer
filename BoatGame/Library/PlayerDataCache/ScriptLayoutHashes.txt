@@ -1,4 +1,4 @@
-iOS
+Android
 c11e14389e05afe0be2b20cd0f949c3c Assembly-CSharp.dll:.main
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
