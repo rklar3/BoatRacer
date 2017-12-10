@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 9
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3980,7 +3980,6 @@ GameObject:
   - component: {fileID: 1346027219}
   - component: {fileID: 1346027218}
   - component: {fileID: 1346027217}
-  - component: {fileID: 1346027216}
   - component: {fileID: 1346027213}
   - component: {fileID: 1346027215}
   - component: {fileID: 1346027222}
@@ -4015,17 +4014,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 516694834}
   offset: {x: 0, y: 3.5, z: -10}
---- !u!114 &1346027216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1346027211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beff4eb8e515840a4b93b89fa80f0dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &1346027217
 AudioListener:
   m_ObjectHideFlags: 0

@@ -22,16 +22,14 @@ public class GameOverScreen : MonoBehaviour {
 
 
 	public void winLevel(){
-		Debug.Log ("Level won");
-		print ("Level Reached" + PlayerPrefs.GetInt ("levelReached"));
 
 		if (PlayerPrefs.GetInt ("levelReached") >= levelTOUnlock) {
 			//dont unlock the next level, since it is already unlocked.
 		} else {
 			PlayerPrefs.SetInt("levelReached",levelTOUnlock);
-			print ("Level to unlock" + levelTOUnlock);
+			//print ("Level to unlock" + levelTOUnlock);
 		}
-		print ("Level Reached" + PlayerPrefs.GetInt("levelReached"));
+		//print ("Level Reached" + PlayerPrefs.GetInt("levelReached"));
 
 		//SceneManager.LoadScene (nextlevel);
 

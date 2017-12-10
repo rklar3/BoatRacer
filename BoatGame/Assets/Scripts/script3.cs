@@ -20,7 +20,7 @@ public class script3 : main {
 
 	public int calcequality(){
 		inequalityval = Random.Range (1,3);	
-		print ("value: "+inequalityval);
+		//print ("value: "+inequalityval);
 
 
 		if (inequalityval == 1) 

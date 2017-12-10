@@ -42,7 +42,7 @@ public class script : main {
 		if (inequalityval == 2) {
 			inequality = " = ";
 			equalsineq = Random.Range (0,2);
-			print (equalsineq);
+			//print (equalsineq);
 			if (equalsineq == 1) {
 				num2 = num1;
 			}

@@ -150,6 +150,6 @@ public class script2 : main {
 		int d = Mathf.RoundToInt((float)distancenum);	
 		distance.text = d + "m";								//updates user distance remaining
 
-		print ("comp1 "+c1);print ("comp2 "+c2);print ("comp3 "+c3);print ("my speed"+userspeeds);
+		//print ("comp1 "+c1);print ("comp2 "+c2);print ("comp3 "+c3);print ("my speed"+userspeeds);
 	}
 }
